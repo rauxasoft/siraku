@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sinensia.siraku.backend.business.model.Pedido;
 import com.sinensia.siraku.backend.business.services.PedidoServices;
+import com.sinensia.siraku.backend.integration.model.PedidoPL;
 import com.sinensia.siraku.backend.integration.repositories.PedidoPLRepository;
 
 @Service
@@ -25,14 +26,15 @@ public class PedidoServicesImpl implements PedidoServices{
 	@Override
 	@Transactional
 	public Pedido create(Pedido pedido) {
-		// TODO Auto-generated method stub
-		return null;
+		PedidoPL pedidoPL = mapper.map(pedido, PedidoPL.class);
+		PedidoPL createdPedidoPL = pedidoPLRepository.save(pedidoPL);
+		return mapper.map(createdPedidoPL, Pedido.class);
 	}
 
 	@Override
 	public Pedido read(long codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		PedidoPL pedidoPL = pedidoPLRepository.findById(codigo).orElse(null);
+		return mapper.map(pedidoPL, Pedido.class);
 	}
 
 	@Override
