@@ -31,9 +31,9 @@ public class BorrameController {
 		// return clienteRepository.findByNombreAndDireccionLike("AR", "Barcelona");
 		// return clienteRepository.dameCosas();
 		// return clienteRepository.findClienteDTO1();
-		// return clienteServices.getClieteDTO2();
+	       return clienteServices.getClieteDTO2();
 		// return productoServices.getNumeroTotalProductosPorFamilia();
-		   return productoServices.getPrecioMedioPorFamilia();
+		//   return productoServices.getPrecioMedioPorFamilia();
 		
 	}
 }
