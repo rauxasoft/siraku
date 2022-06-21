@@ -34,7 +34,6 @@ public class ComercialServicesImpl implements ComercialServices{
 
 	@Override
 	public Comercial read(long codigo) {
-		
 		Optional<ComercialPL> optional = comercialPLRepository.findById(codigo);
 		ComercialPL comercialPL = optional.isPresent()? optional.get(): null;
 		Comercial comercial = mapper.map(comercialPL, Comercial.class);

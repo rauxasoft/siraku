@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name="COMERCIALES")
@@ -13,6 +16,13 @@ public class ComercialPL implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@TableGenerator(name = "GENERADOR",
+					table = "SECUENCIAS",
+					pkColumnName = "NOMBRE",
+					pkColumnValue = "COMERCIAL_SEQ",
+					valueColumnName = "VALOR",
+					allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="GENERADOR")
 	private Long codigo;
 	
 	private String nombre;
