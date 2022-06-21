@@ -1,6 +1,7 @@
 package com.sinensia.siraku.backend.business.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -33,7 +34,9 @@ public class ComercialServicesImpl implements ComercialServices{
 
 	@Override
 	public Comercial read(long codigo) {
-		ComercialPL comercialPL = comercialPLRepository.findById(codigo).orElse(null);
+		
+		Optional<ComercialPL> optional = comercialPLRepository.findById(codigo);
+		ComercialPL comercialPL = optional.isPresent()? optional.get(): null;
 		Comercial comercial = mapper.map(comercialPL, Comercial.class);
 		return comercial;
 	}
