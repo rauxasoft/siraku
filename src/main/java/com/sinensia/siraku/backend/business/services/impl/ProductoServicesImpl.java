@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.siraku.backend.business.model.Familia;
@@ -18,7 +17,6 @@ import com.sinensia.siraku.backend.integration.model.ProductoPL;
 import com.sinensia.siraku.backend.integration.repositories.ProductoPLRepository;
 
 @Service
-@Primary
 public class ProductoServicesImpl implements ProductoServices {
 
 	@Autowired

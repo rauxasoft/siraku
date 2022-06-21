@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.siraku.backend.business.model.Comercial;
@@ -16,7 +15,6 @@ import com.sinensia.siraku.backend.integration.model.ComercialPL;
 import com.sinensia.siraku.backend.integration.repositories.ComercialPLRepository;
 
 @Service
-@Primary
 public class ComercialServicesImpl implements ComercialServices{
 
 	@Autowired

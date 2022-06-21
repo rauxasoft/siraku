@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.siraku.backend.business.model.Cliente;
@@ -18,7 +17,6 @@ import com.sinensia.siraku.backend.integration.model.ClientePL;
 import com.sinensia.siraku.backend.integration.repositories.ClientePLRepository;
 
 @Service
-@Primary
 public class ClienteServicesImpl implements ClienteServices{
 
 	@Autowired
