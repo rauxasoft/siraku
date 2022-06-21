@@ -1,9 +1,12 @@
 package com.sinensia.siraku.backend.business.services.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +29,11 @@ public class ProductoServicesImpl implements ProductoServices {
 	private DozerBeanMapper mapper;
 	
 	@Override
+	@Transactional
 	public Producto create(Producto producto) {
-		// TODO Auto-generated method stub
-		return null;
+		ProductoPL productoPL = mapper.map(producto, ProductoPL.class);
+		ProductoPL createdProductoPL = productoPLRepository.save(productoPL);
+		return mapper.map(createdProductoPL, Producto.class);
 	}
 
 	@Override
@@ -38,15 +43,34 @@ public class ProductoServicesImpl implements ProductoServices {
 	}
 
 	@Override
+	@Transactional
 	public Producto update(Producto producto) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		boolean exists = productoPLRepository.existsById(producto.getCodigo());
+		
+		if(!exists) {
+			return null;
+		}
+		
+		ProductoPL productoPL = mapper.map(producto, ProductoPL.class);
+		ProductoPL updatedProductoPL = productoPLRepository.save(productoPL);
+		
+		return mapper.map(updatedProductoPL, Producto.class);
 	}
 
 	@Override
+	@Transactional
 	public boolean delete(long codigo) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean existeAntes = productoPLRepository.existsById(codigo);
+		
+		if(existeAntes) {
+			productoPLRepository.deleteById(codigo);
+		}
+		
+		boolean existeDespues = productoPLRepository.existsById(codigo);
+		
+		return existeAntes && !existeDespues;
 	}
 
 	@Override
@@ -62,14 +86,12 @@ public class ProductoServicesImpl implements ProductoServices {
 
 	@Override
 	public List<Producto> getBetweenPriceRange(double min, double max) {
-		// TODO Auto-generated method stub
-		return null;
+		return convertFromProductosPL(productoPLRepository.findByPrecioBetween(min, max));
 	}
 
 	@Override
 	public List<Producto> getBetweenDates(Date desde, Date hasta) {
-		// TODO Auto-generated method stub
-		return null;
+		return convertFromProductosPL(productoPLRepository.findByFechaAltaBetween(desde, hasta));
 	}
 
 	@Override
@@ -79,14 +101,34 @@ public class ProductoServicesImpl implements ProductoServices {
 
 	@Override
 	public Map<Familia, Integer> getNumeroTotalProductosPorFamilia() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Map<Familia, Integer> estadisticas = new HashMap<>();
+		
+		List<Object[]> resultSet = productoPLRepository.getEstadistica1();
+		
+		for(Object[] fila: resultSet) {
+			Familia familia = (Familia) fila[0];
+			long cantidad = (Long) fila[1];
+			estadisticas.put(familia, (int) cantidad);
+		}
+		
+		return estadisticas;
 	}
 
 	@Override
 	public Map<Familia, Double> getPrecioMedioPorFamilia() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Map<Familia, Double> estadisticas = new HashMap<>();
+		
+		List<Object[]> resultSet = productoPLRepository.getEstadistica2();
+		
+		for(Object[] fila: resultSet) {
+			Familia familia = (Familia) fila[0];
+			double precioMedio = (Double) fila[1];
+			estadisticas.put(familia, precioMedio);
+		}
+		
+		return estadisticas;
 	}
 	
 	// ***************************************************************

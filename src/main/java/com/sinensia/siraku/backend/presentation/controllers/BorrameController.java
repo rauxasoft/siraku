@@ -5,14 +5,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinensia.siraku.backend.business.services.ClienteServices;
+import com.sinensia.siraku.backend.business.services.ProductoServices;
 import com.sinensia.siraku.backend.integration.repositories.ClientePLRepository;
 
 @RestController
+@SuppressWarnings("unused")
 public class BorrameController {
 
-	@SuppressWarnings("unused")
 	@Autowired
 	private ClientePLRepository clienteRepository;
+	
+	@Autowired
+	private ProductoServices productoServices;
 	
 	@Autowired
 	private ClienteServices clienteServices;
@@ -27,7 +31,9 @@ public class BorrameController {
 		// return clienteRepository.findByNombreAndDireccionLike("AR", "Barcelona");
 		// return clienteRepository.dameCosas();
 		// return clienteRepository.findClienteDTO1();
-		   return clienteServices.getClieteDTO2();
+		// return clienteServices.getClieteDTO2();
+		// return productoServices.getNumeroTotalProductosPorFamilia();
+		   return productoServices.getPrecioMedioPorFamilia();
 		
 	}
 }
