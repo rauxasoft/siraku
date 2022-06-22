@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.sinensia.siraku.backend.business.model.Familia;
 import com.sinensia.siraku.backend.business.model.Producto;
 import com.sinensia.siraku.backend.business.services.ProductoServices;
 
@@ -21,8 +23,23 @@ public class ProductoController {
 	private ProductoServices productoServices;
 	
 	@GetMapping("/productos")
-	public List<Producto> getAll(){
-		return productoServices.getAll();
+	public List<Producto> getProductos(@RequestParam (value="familia", required=false) Familia familia, 
+			                           @RequestParam (value="min", required=false) Double precioMin, 
+			                           @RequestParam (value="max", required=false) Double precioMax) {
+		
+		List<Producto> productos = null;
+		
+		if(familia == null && precioMin == null) {
+			productos = productoServices.getAll();
+		} else {
+			if (familia !=null) {
+				productos = productoServices.getByFamilia(familia);
+			} else {
+				productos = productoServices.getBetweenPriceRange(precioMin, precioMax);
+			}
+		}
+		
+		return productos;
 	}
 	
 	@GetMapping("/productos/{codigo}")
