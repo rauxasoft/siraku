@@ -24,6 +24,11 @@ public class ClienteController {
 		return clienteServices.getAll();
 	}
 	
+	@GetMapping("/clientes/{identificador}")
+	public Cliente getByIdentificador(String identificador) {
+		return clienteServices.read(identificador);
+	}
+	
 	@PostMapping("/clientes")
 	public ResponseEntity<?> create(@RequestBody Cliente cliente, UriComponentsBuilder ucb){
 		
