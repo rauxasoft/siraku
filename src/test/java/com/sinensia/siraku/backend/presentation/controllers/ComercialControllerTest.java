@@ -22,7 +22,7 @@ import com.sinensia.siraku.backend.business.model.Comercial;
 import com.sinensia.siraku.backend.business.services.ComercialServices;
 
 @WebMvcTest(controllers=ComercialController.class)
-public class ComercialControllerTest {
+class ComercialControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;	// "aparato" que va a realizar peticiones HTTP y recibir respuestas (es el cliente)
