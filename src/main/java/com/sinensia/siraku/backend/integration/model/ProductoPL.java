@@ -15,8 +15,6 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.sinensia.siraku.backend.business.model.Familia;
-
 @Entity
 @Table(name="PRODUCTOS")
 public class ProductoPL implements Serializable{
@@ -39,7 +37,7 @@ public class ProductoPL implements Serializable{
 	private Date fechaAlta;
 	
 	@Enumerated(EnumType.STRING)
-	private Familia familia;
+	private FamiliaPL familia;
 	private boolean descatalogado;
 	
 	public ProductoPL() {
@@ -78,11 +76,11 @@ public class ProductoPL implements Serializable{
 		this.fechaAlta = fechaAlta;
 	}
 
-	public Familia getFamilia() {
+	public FamiliaPL getFamilia() {
 		return familia;
 	}
 
-	public void setFamilia(Familia familia) {
+	public void setFamilia(FamiliaPL familia) {
 		this.familia = familia;
 	}
 
