@@ -93,6 +93,12 @@ class ClienteServicesImplTest {
 		fail("Not yet implemented");
 	}
 	
+	// ***************************************************************
+	//
+	// PRIVATE METHODS
+	//
+	// ***************************************************************
+	
 	private void initMocks() {
 		
 	}

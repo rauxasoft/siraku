@@ -3,6 +3,8 @@ package com.sinensia.siraku.backend.presentation.controllers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.StandardCharsets;
@@ -38,6 +40,7 @@ class ComercialControllerTest {
 		initMocks();
 	}
 	
+	private Comercial comercialNuevo;
 	private Comercial comercial1;
 	private Comercial comercial2;
 	private List<Comercial> comerciales;
@@ -50,22 +53,41 @@ class ComercialControllerTest {
 		MvcResult mvcResult = mockMvc.perform(get("/comerciales").contentType("application/json"))
 									 .andExpect(status().isOk())
 									 .andReturn();
+	
+		String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);	
 		
-		// MvcResult de alguna manera modeliza la respuesta HTTP
-		// En MvcResult tenemos un body que podemos analizar
-		// En MvcResult tenemos el código HTTP, el tiempo en milisegundos, y todos los headers
-		
-		String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);	// Obtenemos JSON (String) que viaja en la respuesta
-		String comercialesAsJSON = objectMapper.writeValueAsString(comerciales);  					// Serializar objeto Java a JSON (String)
-		
-		System.out.println("responseBody: 				  " + responseBody);
-		System.out.println("comercial serializado a JSON: " + comercialesAsJSON);
-		
-		assertThat(responseBody).isEqualToIgnoringWhitespace(comercialesAsJSON);					// Comprobamos que nuestro controlador ha serializado correctamente.
+		assertThat(responseBody).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(comerciales));				
 		
 	}
 	
+	@Test
+	public void cuandoPidoComercialPorCodigo() throws Exception {
+		
+		when(comercialServices.read(100L)).thenReturn(comercial1);
+		
+		MvcResult mvcResult = mockMvc.perform(get("/comerciales/100").contentType("application/json"))
+				 .andExpect(status().isOk())
+				 .andReturn();
+		
+		String responseBody = mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8);
+		assertThat(responseBody).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(comercial1));
+		
+	}
 	
+	@Test
+	public void cuandoCreoComercial() throws Exception {
+		
+		when(comercialServices.create(comercialNuevo)).thenReturn(comercial1);
+		
+		String requestBody = objectMapper.writeValueAsString(comercialNuevo);
+		
+		mockMvc.perform(post("/comerciales")
+				.content(requestBody)
+				.contentType("application/json"))
+				.andExpect(status().isCreated())
+				.andExpect(header().string("Location", "http://localhost/comerciales/100"));	
+		
+	}
 	
 	
 	// ***************************************************************
@@ -75,6 +97,12 @@ class ComercialControllerTest {
 	// ***************************************************************
 	
 	private void initMocks() {
+		
+		comercialNuevo = new Comercial();
+		comercialNuevo.setCodigo(null);
+		comercialNuevo.setNombre("Pepín");
+		comercialNuevo.setApellido1("Gálvez");
+		comercialNuevo.setApellido2("Ridruejo");
 		
 		comercial1 = new Comercial();
 		comercial1.setCodigo(100L);

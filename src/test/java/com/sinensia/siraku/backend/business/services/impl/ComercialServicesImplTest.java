@@ -109,6 +109,12 @@ class ComercialServicesImplTest {
 		
 	}
 	
+	// ***************************************************************
+	//
+	// PRIVATE METHODS
+	//
+	// ***************************************************************
+	
 	private void initMocks() {
 		
 		comercialPL1 = new ComercialPL();
