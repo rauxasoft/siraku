@@ -28,7 +28,7 @@ public class PedidoController {
 	}
 	
 	@GetMapping("/pedidos/{codigo}")
-	public Pedido getByCodigo(@PathVariable("codigo") Long codigo) {
+	public Pedido getByCodigo(@PathVariable Long codigo) {
 		return pedidoServices.read(codigo);
 	}
 	

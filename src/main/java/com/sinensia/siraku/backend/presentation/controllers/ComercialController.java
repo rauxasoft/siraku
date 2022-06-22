@@ -26,7 +26,7 @@ public class ComercialController {
 	}
 	
 	@GetMapping("/comerciales/{codigo}")
-	public Comercial getByCodigo(@PathVariable("codigo") Long codigo) {
+	public Comercial getByCodigo(@PathVariable Long codigo) {
 		return comercialServices.read(codigo);
 	}
 	

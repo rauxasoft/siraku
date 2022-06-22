@@ -43,7 +43,7 @@ public class ProductoController {
 	}
 	
 	@GetMapping("/productos/{codigo}")
-	public Producto getByCodigo(@PathVariable("codigo") Long codigo) {
+	public Producto getByCodigo(@PathVariable Long codigo) {
 		return productoServices.read(codigo);
 	}
 	
