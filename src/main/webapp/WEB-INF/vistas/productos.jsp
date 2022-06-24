@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<jsp:include page="header.jsp"/>
-		<h2>Listado de Comerciales</h2>
+		<h2>Listado de Productos</h2>
 		<table>
 			<tr>
 				<th>Código</th>

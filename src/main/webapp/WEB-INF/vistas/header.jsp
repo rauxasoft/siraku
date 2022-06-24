@@ -4,6 +4,7 @@
 	<ul>
 		<li><a href="home">home</a></li>
 		<li><a href="comerciales">comerciales</a>
+		<li><a href="alta-comercial">nuevo comercial</a>
 	</ul>
 </nav>
 <hr>
