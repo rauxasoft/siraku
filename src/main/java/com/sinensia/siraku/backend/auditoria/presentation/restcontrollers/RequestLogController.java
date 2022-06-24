@@ -1,4 +1,4 @@
-package com.sinensia.siraku.backend.auditoria.presentation.controllers;
+package com.sinensia.siraku.backend.auditoria.presentation.restcontrollers;
 
 import java.util.List;
 

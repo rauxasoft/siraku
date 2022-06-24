@@ -22,9 +22,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.siraku.backend.business.model.Comercial;
 import com.sinensia.siraku.backend.business.services.ComercialServices;
+import com.sinensia.siraku.backend.presentation.restcontrollers.ComercialController;
 
 @WebMvcTest(controllers=ComercialController.class)
-class ComercialControllerTest {
+class AppComercialControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;	// "aparato" que va a realizar peticiones HTTP y recibir respuestas (es el cliente)

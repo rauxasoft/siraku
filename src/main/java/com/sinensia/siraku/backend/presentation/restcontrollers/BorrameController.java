@@ -1,4 +1,4 @@
-package com.sinensia.siraku.backend.presentation.controllers;
+package com.sinensia.siraku.backend.presentation.restcontrollers;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,24 +43,11 @@ public class BorrameController {
 	    // return clienteServices.getClieteDTO2();
 		// return productoServices.getNumeroTotalProductosPorFamilia();
 		// return productoServices.getPrecioMedioPorFamilia();
+		//   return pedidoPLRepository.getLineasPedido();
+		   return pedidoPLRepository.getLineasPedido(2L);
 		
+	
 		
-		Optional<PedidoPL> optional = pedidoPLRepository.findById(1L);
-		
-		PedidoPL pedidoPL = optional.get();
-		
-		System.out.println(pedidoPL.getCliente().getNombre());
-		
-		System.out.println(pedidoPL.getComercial().getNombre());
-		
-		List<LineaPedidoPL> lineas = pedidoPL.getLineas();
-		
-		
-		System.out.println(lineas);
-		
-		
-		
-		return null;
 		
 	}
 }

@@ -1,4 +1,4 @@
-package com.sinensia.siraku.backend.presentation.controllers;
+package com.sinensia.siraku.backend.presentation.restcontrollers;
 
 import java.util.List;
 

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.siraku.backend.business.model.Familia;
 import com.sinensia.siraku.backend.business.model.Producto;
 import com.sinensia.siraku.backend.business.services.ProductoServices;
+import com.sinensia.siraku.backend.presentation.restcontrollers.ProductoController;
 
 @WebMvcTest(controllers=ProductoController.class)
 class ProductoControllerTest {
