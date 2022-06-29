@@ -2,6 +2,7 @@ package com.sinensia.siraku.backend.presentation.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import com.sinensia.siraku.backend.business.services.ComercialServices;
 
 @Controller
 @RequestMapping("/siraku")
+@CrossOrigin
 public class AppComercialController {
 
 	@Autowired
